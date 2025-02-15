@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tempo Oculto</title>
+  <style>
+    body {
+      background-color: #C8A2D2; /* Cor lilás para o fundo */
+      font-family: Arial, sans-serif;
+      color: white; /* Cor do texto em branco para contraste */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .content {
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    .clock {
+      margin: 20px auto;
+      width: 200px;
+      height: 200px;
+      border: 10px solid white;
+      border-radius: 50%;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .clock span {
+      font-size: 1.5em;
+    }
+
+    .button {
+      background-color: #9B7FB5; /* Cor lilás mais escura para o botão */
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #8C6C95; /* Cor lilás mais escura no hover */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="content">
+    <h1>Quantas vezes esperaste pela altura certa?</h1>
+    <h2>Já viste as Horas?</h2>
+
+    <div class="clock">
+      <span id="countdown"></span>
+    </div>
+
+    <button class="button">Descubra mais</button>
+  </div>
+
+  <script>
+    // Define a data do lançamento
+    const launchDate = new Date("April 1, 2025 00:00:00").getTime();
+
+    const countdownElement = document.getElementById("countdown");
+
+    // Atualiza a contagem regressiva a cada segundo
+    const countdown = setInterval(function() {
+      const now = new Date().getTime();
+      const distance = launchDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+      // Se a contagem terminar, mostra mensagem
+      if (distance < 0) {
+        clearInterval(countdown);
+        countdownElement.innerHTML = "O lançamento chegou!";
+      }
+    }, 1000);
+  </script>
+
+</body>
+</html>
